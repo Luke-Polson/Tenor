@@ -42,6 +42,7 @@ public class MoodWindow extends JFrame{
 		
 		String filePath = "";
 		
+		// the correct file is determined by the 'mood' parameter
 		switch(mood) {
 	
 			case 0: {filePath = "quotes/veryBadQuotes.txt"; break;}
@@ -59,8 +60,8 @@ public class MoodWindow extends JFrame{
 		
 		// keep a reference to the main frame, so we can return to it 
 		parentFrame = parent;
-		
-		// here, choose what file to use based on the type of window being created 
+	
+		// open the correct file, and read the contents into a list
 		try {
 			quoteList = Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8);
 		} catch (IOException e1) {
@@ -73,7 +74,6 @@ public class MoodWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				BreathingExercise b = new BreathingExercise(4, 4, 4);
-				// make a window that asks to put in a time ? 	
 			}
 		});
 		
@@ -81,6 +81,8 @@ public class MoodWindow extends JFrame{
 			
 			public void actionPerformed(ActionEvent e) {	
 				
+				// choose a random number from 0 -> quoteList.size() / 2, and multiply it by 2 to find quote index
+				// author index will be the quote index + 1
 				int index = (int) (2 * Math.floor(rand.nextInt(quoteList.size() / 2)));
 				quoteArea.setText("\"" + quoteList.get(index) + "\"");
 				authorLabel.setText(" - " + quoteList.get(index+1));
@@ -88,6 +90,8 @@ public class MoodWindow extends JFrame{
 
 		});
 		
+		// mood windows are disposed of when closed to save memory, and the parent frame is set to visible again
+		// so user can select another mood if they like. 
 		this.addWindowListener(new WindowAdapter() {	
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -132,6 +136,7 @@ public class MoodWindow extends JFrame{
 		
 	}
 	
+	// addObject function adds components to the MoodWindow 
 	public void addObject(Component component, GridBagLayout layout, GridBagConstraints gbc, int gridy, int gridx, int gridwidth, int gridheight){
 
         gbc.gridx = gridx;

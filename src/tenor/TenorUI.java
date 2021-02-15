@@ -40,6 +40,7 @@ public class TenorUI {
 	
 	public void populateMainFrame() {
 		
+		// Main frame is the main window, which asks for your mood 
 		mainframe = new JFrame();
 		mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainframe.setSize(700, 500);
@@ -53,6 +54,7 @@ public class TenorUI {
 		mainLabel = new JLabel("How are you feeling today?", SwingConstants.CENTER);
 		mainLabel.setFont (mainLabel.getFont ().deriveFont (32.0f));
 		
+		// Labels will have MouseListeners added to them, so as to serve as 'buttons'
 		veryBad = new JLabel("veryBad", SwingConstants.CENTER);
 		bad = new JLabel("bad", SwingConstants.CENTER);
 		okay = new JLabel("okay", SwingConstants.CENTER);
@@ -81,10 +83,16 @@ public class TenorUI {
 	
 	public void createMouseListeners() {
 		
+		/* This function adds a MouseListener to each of the mood labels, to display the correct mood window
+		 * when the mood label is clicked. 
+		 * Each listener provides a different integer parameter to the MoodWindow, which determines
+		 * the correct quotes and breathing exercises to display. */
+		
 		veryBad.addMouseListener(new MouseAdapter() {	
 			public void mouseClicked(MouseEvent e) {
 				mainframe.setVisible(false);
-				// provide parameters to MoodWindow so it populates it correctly.
+				
+				// Create a new mood window with the correct mood 
 				MoodWindow mw = new MoodWindow(mainframe, "Sorry you're not feeling the best.", 0);
 				mw.setVisible(true);
 			}
