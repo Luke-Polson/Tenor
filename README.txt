@@ -1,0 +1,1 @@
+Sometimes during the day you just need a little pick-me-up, or want some encouragement and motivation. Tenor is a simple application that asks for your mood, and suggests some breathing exercises, as well as providing some relevant quotes mainly from Stoic philosophy.
