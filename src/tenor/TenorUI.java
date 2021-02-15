@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,15 +12,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class TenorUI {
-	
-	
 	
 	public JFrame mainframe, quoteFrame, veryBadFrame, badFrame, okayFrame, goodFrame, veryGoodFrame;
 	
@@ -55,13 +55,27 @@ public class TenorUI {
 		mainLabel.setFont (mainLabel.getFont ().deriveFont (32.0f));
 		
 		// Labels will have MouseListeners added to them, so as to serve as 'buttons'
-		veryBad = new JLabel("veryBad", SwingConstants.CENTER);
-		bad = new JLabel("bad", SwingConstants.CENTER);
-		okay = new JLabel("okay", SwingConstants.CENTER);
-		good = new JLabel("good", SwingConstants.CENTER);
-		veryGood = new JLabel("veryGood", SwingConstants.CENTER);
+		veryBad = new JLabel("", SwingConstants.CENTER);
+		Icon icon = new ImageIcon("images/veryBad.png");
+		veryBad.setIcon(icon);
 		
-		gbc.ipadx = 80;
+		bad = new JLabel("", SwingConstants.CENTER);
+		icon = new ImageIcon("images/bad.png");
+		bad.setIcon(icon);
+		
+		okay = new JLabel("", SwingConstants.CENTER);
+		icon = new ImageIcon("images/okay.png");
+		okay.setIcon(icon);
+		
+		good = new JLabel("", SwingConstants.CENTER);
+		icon = new ImageIcon("images/good.png");
+		good.setIcon(icon);
+		
+		veryGood = new JLabel("", SwingConstants.CENTER);
+		icon = new ImageIcon("images/veryGood.png");
+		veryGood.setIcon(icon);
+		
+		gbc.ipadx = 30;
 		gbc.ipady = 50;	
 		
 		addObject(mainLabel, mainframe, gbl, gbc, 0, 0, 5, 1);
