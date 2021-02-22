@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
@@ -73,7 +74,9 @@ public class MoodWindow extends JFrame{
 		breathingButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BreathingExercise b = new BreathingExercise(4, 4, 4);
+				
+				displayBreathingOptions();
+				
 			}
 		});
 		
@@ -127,17 +130,17 @@ public class MoodWindow extends JFrame{
 		
 		authorLabel = new JLabel();
 		
-		this.addObject(quoteButton, gbl, gbc, 1, 0, 1, 1);
-		this.addObject(breathingButton, gbl, gbc, 1, 1, 1, 1);
-		this.addObject(mainMessage, gbl, gbc, 0, 0, 2, 1);
-		this.addObject(quoteArea, gbl, gbc, 2, 0, 2, 1);
-		this.addObject(authorLabel, gbl, gbc, 4, 0, 2, 1);
+		this.addObject(this, quoteButton, gbl, gbc, 1, 0, 1, 1);
+		this.addObject(this, breathingButton, gbl, gbc, 1, 1, 1, 1);
+		this.addObject(this, mainMessage, gbl, gbc, 0, 0, 2, 1);
+		this.addObject(this, quoteArea, gbl, gbc, 2, 0, 2, 1);
+		this.addObject(this, authorLabel, gbl, gbc, 4, 0, 2, 1);
 		
 		
 	}
 	
 	// addObject function adds components to the MoodWindow 
-	public void addObject(Component component, GridBagLayout layout, GridBagConstraints gbc, int gridy, int gridx, int gridwidth, int gridheight){
+	public void addObject(JFrame frame, Component component, GridBagLayout layout, GridBagConstraints gbc, int gridy, int gridx, int gridwidth, int gridheight){
 
         gbc.gridx = gridx;
         gbc.gridy = gridy;
@@ -146,9 +149,67 @@ public class MoodWindow extends JFrame{
         gbc.gridheight = gridheight;
 
         layout.setConstraints(component, gbc);
-        this.add(component);
+        frame.add(component);
         
     }
+	
+	public void displayBreathingOptions() {
+		
+		// make this into a method ?
+		JFrame breathingSetup = new JFrame("Tenor");
+		breathingSetup.setSize(300, 300);
+		
+		GridBagLayout gbl = new GridBagLayout();
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		breathingSetup.setLayout(gbl);
+		
+		JTextField inTime, inHoldTime, outTime, outHoldTime;
+		inTime = new JTextField(10);
+		inHoldTime = new JTextField(10);
+		outTime = new JTextField(10);
+		outHoldTime = new JTextField(10);
+		
+		
+		JButton breathe = new JButton("Breathe");
+		breathe.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				int in = Integer.parseInt(inTime.getText());
+				int inHold = Integer.parseInt(inHoldTime.getText());
+				int out = Integer.parseInt(outTime.getText());
+				int outHold = Integer.parseInt(outHoldTime.getText());
+				
+				BreathingExercise b = new BreathingExercise(in, inHold, out, outHold);
+				
+			}
+			
+		});
+		
+		
+		JButton suggestedButton = new JButton("Suggested");
+		suggestedButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+	
+		addObject(breathingSetup, suggestedButton, gbl, gbc, 0, 0, 1, 1);
+		addObject(breathingSetup, inTime, gbl, gbc, 1, 0, 1, 1);
+		addObject(breathingSetup, inHoldTime, gbl, gbc, 2, 0, 1, 1);
+		addObject(breathingSetup, outTime, gbl, gbc, 3, 0, 1, 1);
+		addObject(breathingSetup, outHoldTime, gbl, gbc, 4, 0, 1, 1);
+		addObject(breathingSetup, breathe, gbl, gbc, 5, 0, 1, 1);
+	
+		
+		breathingSetup.setVisible(true);
+		
+	}
 	
 	
 
